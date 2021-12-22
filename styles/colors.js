@@ -3,6 +3,6 @@ export default {
     primary: '#1d3557',
     primaryAccent: '#457b9d',
     primaryLight: '#a8dadc',
-    secondary: '#e63946',
+    secondary: '#9b2226',
     background: '#f1faee',
 }

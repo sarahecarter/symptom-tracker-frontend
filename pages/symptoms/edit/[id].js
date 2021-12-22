@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import { useState } from "react";
 import {useRouter} from 'next/router'
 import Back from "../../../components/Back";
+import colors from '../../../styles/colors'
 
 const Form = styled.form`
     width: 80%;
@@ -19,17 +20,34 @@ const Form = styled.form`
 const FlexPair = styled.div`
     display: flex;
     flex-direction: column;
+    color: ${colors.primary};
     > * {
         margin: 3px;
     }
     input, textarea {
         padding: 5px;
+        border: 1px solid ${colors.primary};
+        border-radius: 3px;
     }
     #severity {
         width: 60%;
     }
     #startDate {
         width: 60%;
+    }
+`
+const Submit = styled.input`
+    display: block;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+    margin: 30px auto 20px;
+    background: ${colors.primaryAccent};
+    color: ${colors.background};
+    font-size: 1em;
+    &:hover {
+        background: ${colors.secondary};
     }
 `
 
@@ -123,7 +141,7 @@ export default function Edit({symptom}) {
                     />
                 </FlexPair>
 
-                <input type="submit" value="Update Symptom"/>
+                <Submit type="submit" value="Update Symptom"/>
             </Form>
             <Back></Back>
         </div>

@@ -76,6 +76,7 @@ const Bar = styled.div`
 const Footer = styled.div`
   text-align: center;
   margin: 40px;
+  font-weight: 300;
 `
 
 export default function Layout({children, home, title, description}) {

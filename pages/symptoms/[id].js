@@ -4,22 +4,44 @@ import styled from '@emotion/styled'
 import Link from "next/link"
 import Back from '../../components/Back'
 import {useRouter} from "next/router"
+import colors from '../../styles/colors'
 
 const Card = styled.div`
 height: auto;
 width: 80%;
 max-width: 400px;
-margin: 10px auto;
-padding: 10px;
-border: 1px solid gray;
+margin: 20px auto;
+border-left: 1px solid silver;
+border-right: 1px solid silver;
+border-bottom: 1px solid silver;
 border-radius: 10px;
 text-align: center;
 display: flex;
 flex-direction: column;
-justify-content: space-evenly;
+justify-content: space-between;
 align-items: center;
-& > * {
-    margin: 5px;
+font-size: 1.1em;
+box-shadow: 5px 5px 10px silver;
+div.heading {
+    background: linear-gradient(106deg, rgba(29,53,87,1) 0%, rgba(69,123,157,1) 85%);
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    color: ${colors.background};
+    padding: 10px;
+}
+> * {
+    margin-bottom: 10px;
+}
+.severe {
+    color: ${colors.secondary};
+    font-weight: 600;
+}
+.mild {
+    color: ${colors.primaryAccent};
+    font-weight: 600;
+}
+p {
+    font-weight: 300;
 }
 @media (min-width: 768px) {
 
@@ -32,8 +54,21 @@ const ButtonContainer = styled.div`
         margin: 5px;
     }
     button {
-        padding: 2px;
+        padding: 5px;
+        border-radius: 20px;
+        border: none;
+        background: ${colors.primaryAccent};
+        color: ${colors.background};
+        font-weight: 400;
+        font-size: .9em;
         cursor: pointer;
+        &:hover {
+            background: ${colors.secondary};
+        }
+    }
+
+    .delete {
+        background: ${colors.primary};
     }
 `
 
@@ -51,19 +86,21 @@ export default function Show({symptom}, title, description) {
     return ( 
         <>
             <Card>
-                <h2>{symptom.symptom}</h2>
+                <div className="heading">
+                    <h2>{symptom.symptom}</h2>
+                </div>
                 <h4>Body Part: {symptom.bodyPart}</h4>
-                <h5>Date Started:</h5>
+                <h4>Date Started:</h4>
                 <p>{symptom.startDate}</p>
-                <h5>Severity:</h5>
-                <p>{symptom.severity}</p>
-                <h5>Notes:</h5>
+                <h4>Severity:</h4>
+                <p className={symptom.severity > 5 ? "severe" : "mild"}>{symptom.severity}</p>
+                <h4>Notes:</h4>
                 <p>{symptom.notes}</p>
                 <ButtonContainer>
                     <Link href={`/symptoms/edit/${symptom._id}`}>
                         <button><a>Edit Symptom</a></button>
                     </Link>
-                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={handleDelete} className="delete">Delete</button>
                 </ButtonContainer>
             </Card>
             <Back></Back>

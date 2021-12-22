@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import colors from '../../styles/colors'
 
-const New = styled.button`
+const Button = styled.button`
     display: block;
     padding: 10px;
     border-radius: 20px;
@@ -13,6 +13,11 @@ const New = styled.button`
     background: ${colors.primaryAccent};
     color: ${colors.background};
     font-size: 1em;
+    box-shadow: 5px 5px 10px silver;
+    &:hover {
+        box-shadow: none;
+        background: ${colors.secondary};
+    }
 `
 
 const CardContainer = styled.div`
@@ -52,6 +57,13 @@ const Card = styled.div`
     p {
         color: ${colors.secondary};
         margin-bottom: 20px;
+        font-weight: 400;
+        span {
+            color: ${colors.primary};
+        }
+    }
+    &:hover {
+        box-shadow: none;
     }
     @media (min-width: 768px) {
         width: 25%;
@@ -67,7 +79,7 @@ export default function Index({symptoms}, title, description) {
             </Head>
             <div>
                 <Link href="/symptoms/new">
-                    <New>Track new symptom</New>
+                    <Button>Track new symptom</Button>
                 </Link>
                 <CardContainer>
                     {symptoms.map(symp => {
@@ -77,7 +89,7 @@ export default function Index({symptoms}, title, description) {
                                     <h2>{symp.symptom}</h2>
                                 </div>
                                 <h3>{symp.bodyPart}</h3>
-                                <p>Started: {symp.startDate}</p>
+                                <p>Started: <span>{symp.startDate}</span></p>
                             </Card>
                         </Link>
                     })}
