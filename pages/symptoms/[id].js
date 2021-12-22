@@ -74,7 +74,7 @@ const ButtonContainer = styled.div`
 
 export default function Show({symptom}, title, description) {
     const router = useRouter()
-    const url = "http://sc-capstone-backend.herokuapp.com/symptoms/"
+    const url = "https://sc-capstone-backend.herokuapp.com/symptoms/"
 
     const handleDelete = async () => {
         await fetch(url + symptom._id, {
