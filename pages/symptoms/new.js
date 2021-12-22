@@ -54,7 +54,7 @@ const Submit = styled.input`
 
 export default function New(props) {
     const router = useRouter()
-    const url = "http://sc-capstone-backend.herokuapp.com/symptoms"
+    const url = "https://sc-capstone-backend.herokuapp.com/symptoms"
 
     const [bodyPartIndex, setBodyPartIndex] = useState(0)
     const [symptomList, setSymptomList] = useState([])

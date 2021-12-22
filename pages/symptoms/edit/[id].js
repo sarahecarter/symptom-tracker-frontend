@@ -53,7 +53,7 @@ const Submit = styled.input`
 
 export default function Edit({symptom}) {
     const router = useRouter()
-    const url = "http://sc-capstone-backend.herokuapp.com/symptoms/"
+    const url = "https://sc-capstone-backend.herokuapp.com/symptoms/"
 
     const [formState, setFormState] = useState(symptom)
     console.log(symptom.startDate)
