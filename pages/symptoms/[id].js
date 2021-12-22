@@ -22,6 +22,9 @@ export default function Show({symptom}, title, description) {
     justify-content: space-evenly;
     align-items: center;
     cursor: pointer;
+    & > * {
+        margin: 5px;
+    }
     @media (min-width: 768px) {
 
     }
@@ -34,23 +37,27 @@ export default function Show({symptom}, title, description) {
         router.push("/symptoms")
     }
 
-    return <Card>
-        <h1>{symptom.symptom}</h1>
-        <h4>Body Part: {symptom.bodyPart}</h4>
-        <h5>Date Started:</h5>
-        <p>{symptom.startDate}</p>
-        <h5>Severity:</h5>
-        <p>{symptom.severity}</p>
-        <h5>Notes:</h5>
-        <p>{symptom.notes}</p>
-        <Link href={`/symptoms/edit/${symptom._id}`}>
-            <button><a>Edit Symptom</a></button>
-        </Link>
-        <button onClick={handleDelete}>Delete Symptom</button>
-        <Link href="/symptoms">
-            <a>Back to Main List</a>
-        </Link>
-    </Card>
+    return ( 
+        <>
+            <Card>
+                <h2>{symptom.symptom}</h2>
+                <h4>Body Part: {symptom.bodyPart}</h4>
+                <h5>Date Started:</h5>
+                <p>{symptom.startDate}</p>
+                <h5>Severity:</h5>
+                <p>{symptom.severity}</p>
+                <h5>Notes:</h5>
+                <p>{symptom.notes}</p>
+                <Link href={`/symptoms/edit/${symptom._id}`}>
+                    <button><a>Edit Symptom</a></button>
+                </Link>
+                <button onClick={handleDelete}>Delete Symptom</button>
+            </Card>
+            <Link href="/symptoms">
+                <a>Back to Main List</a>
+            </Link>
+        </>
+    )
 }
 
 export async function getServerSideProps(ctx) {

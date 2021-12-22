@@ -3,20 +3,30 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useState } from 'react'
 
-
+// Styled Components
 const Flex = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 `
 
 const Nav = styled.nav`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: none;
+  &.showMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+  }
+  @media (min-width: 768px) {
+    display: flex;
+    margin: 10px;
+  }
 `
 
 const NavLink = styled.a`
@@ -31,10 +41,22 @@ const Hamburger = styled.div`
   cursor: pointer;
   flex-direction: column;
   justify-content: center;
+  &.cross .bar-1 {
+    transform: rotate(45deg) translate(3px, 10px);
+  }
+  &.cross .bar-2 {
+    opacity: 0;
+  }
+  &.cross .bar-3 {
+    transform: rotate(-45deg) translate(2px, -10px);
+  }
+  @media (min-width: 768px) {
+    display: none;
+  }
 `
 
 const Bar = styled.div`
-  width: 30px;
+  width: 25px;
   height: 3px;
   background-color: black;
   margin: 3px;
@@ -46,6 +68,12 @@ const Footer = styled.div`
 `
 
 export default function Layout({children, home, title, description}) {
+    const [menuOpen, setMenuOpen] = useState(false)
+
+    const handleToggle = () => {
+      menuOpen === true ? setMenuOpen(false) : setMenuOpen(true)
+    }
+
     return (
     <div>
         <Head>
@@ -73,20 +101,20 @@ export default function Layout({children, home, title, description}) {
                 `}
               >Symptom Tracker</h1>
             </Link>
-            <Hamburger>
-              <Bar></Bar>
-              <Bar></Bar>
-              <Bar></Bar>
+            <Hamburger onClick={() => handleToggle()} className={`${menuOpen ? "cross" : ""}`}>
+              <Bar className="bar-1"></Bar>
+              <Bar className="bar-2"></Bar>
+              <Bar className="bar-3"></Bar>
             </Hamburger>
+            <Nav className={`${menuOpen ? "showMenu" : ""}`}>
+              <Link href="/">
+                <NavLink>Home</NavLink>
+              </Link>
+              <Link href="/symptoms">
+                <NavLink>Symptoms</NavLink>
+              </Link>
+            </Nav>
           </Flex>
-          <Nav>
-            <Link href="/">
-              <NavLink>Home</NavLink>
-            </Link>
-            <Link href="/symptoms">
-              <NavLink>Symptoms</NavLink>
-            </Link>
-          </Nav>
         </header>
         <main>{children}</main>
         <Footer>
