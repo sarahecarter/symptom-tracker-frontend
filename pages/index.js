@@ -1,5 +1,28 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import Head from 'next/head'
 import Link from 'next/link'
+
+const Join = styled.div`
+  width: 80%;
+  max-width: 400px;
+  margin: 30px auto;
+  text-align: center;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 30px 10px;
+  > * {
+    margin: 8px;
+  }
+  p {
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  button {
+    padding: 5px;
+  }
+`
 
 export default function Home(title, description) {
   return (
@@ -10,11 +33,12 @@ export default function Home(title, description) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h3>Log in or Sign Up</h3>
+      <Join>
+        <h3>Welcome to the Symptom Tracker App</h3>
+        <p>Log in or sign up to start monitoring your health.</p>
         <button>Log In</button>
         <button>Sign Up</button>
-      </main>
+      </Join>
     </div>
   )
 }

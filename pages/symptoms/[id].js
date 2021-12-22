@@ -2,34 +2,45 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from "next/link"
+import Back from '../../components/Back'
 import {useRouter} from "next/router"
+
+const Card = styled.div`
+height: auto;
+width: 80%;
+max-width: 400px;
+margin: 10px auto;
+padding: 10px;
+border: 1px solid gray;
+border-radius: 10px;
+text-align: center;
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+& > * {
+    margin: 5px;
+}
+@media (min-width: 768px) {
+
+}
+`
+
+const ButtonContainer = styled.div`
+    display: flex;
+    > * {
+        margin: 5px;
+    }
+    button {
+        padding: 2px;
+        cursor: pointer;
+    }
+`
 
 export default function Show({symptom}, title, description) {
     const router = useRouter()
     const url = "http://sc-capstone-backend.herokuapp.com/symptoms/"
 
-    const Card = styled.div`
-    height: auto;
-    width: 80%;
-    max-width: 400px;
-    margin: 10px auto;
-    padding: 10px;
-    border: 1px solid gray;
-    border-radius: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    cursor: pointer;
-    & > * {
-        margin: 5px;
-    }
-    @media (min-width: 768px) {
-
-    }
-`
-    
     const handleDelete = async () => {
         await fetch(url + symptom._id, {
             method: "DELETE"
@@ -48,14 +59,14 @@ export default function Show({symptom}, title, description) {
                 <p>{symptom.severity}</p>
                 <h5>Notes:</h5>
                 <p>{symptom.notes}</p>
-                <Link href={`/symptoms/edit/${symptom._id}`}>
-                    <button><a>Edit Symptom</a></button>
-                </Link>
-                <button onClick={handleDelete}>Delete Symptom</button>
+                <ButtonContainer>
+                    <Link href={`/symptoms/edit/${symptom._id}`}>
+                        <button><a>Edit Symptom</a></button>
+                    </Link>
+                    <button onClick={handleDelete}>Delete</button>
+                </ButtonContainer>
             </Card>
-            <Link href="/symptoms">
-                <a>Back to Main List</a>
-            </Link>
+            <Back></Back>
         </>
     )
 }

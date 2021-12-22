@@ -1,5 +1,37 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { useState } from "react";
 import {useRouter} from 'next/router'
+import Back from "../../../components/Back";
+
+const Form = styled.form`
+    width: 80%;
+    max-width: 450px;
+    margin: 20px auto;
+    input[type="submit"] {
+        margin: 10px auto 30px;
+        padding: 5px;
+        display: block;
+    }
+`
+
+const FlexPair = styled.div`
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin: 3px;
+    }
+    input, textarea {
+        padding: 5px;
+    }
+    #severity {
+        width: 60%;
+    }
+    #startDate {
+        width: 60%;
+    }
+`
 
 export default function Edit({symptom}) {
     const router = useRouter()
@@ -28,8 +60,8 @@ export default function Edit({symptom}) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <Form onSubmit={handleSubmit}>
+                <FlexPair>
                     <label htmlFor="bodyPart">Body Part</label>
                     <input 
                         id="bodyPart"
@@ -39,9 +71,9 @@ export default function Edit({symptom}) {
                         onChange={handleChange}
                         placeholder="Body Part"
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="symptom">Symptom</label>
                     <input 
                         id="symptom"
@@ -51,9 +83,9 @@ export default function Edit({symptom}) {
                         onChange={handleChange}
                         placeholder="Symptom"
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="startDate">Start Date</label>
                     <input 
                         id="startDate"
@@ -62,9 +94,9 @@ export default function Edit({symptom}) {
                         value={formState.startDate}
                         onChange={handleChange}
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="severity">Severity (1-10)</label>
                     <input 
                         id="severity"
@@ -77,9 +109,9 @@ export default function Edit({symptom}) {
                         step="1"
                         placeholder="1-10"
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="notes">Notes</label>
                     <textarea 
                         id="notes"
@@ -89,10 +121,11 @@ export default function Edit({symptom}) {
                         onChange={handleChange}
                         placeholder="Describe symptom here"
                     />
-                </div>
+                </FlexPair>
 
                 <input type="submit" value="Update Symptom"/>
-            </form>
+            </Form>
+            <Back></Back>
         </div>
     )
 }

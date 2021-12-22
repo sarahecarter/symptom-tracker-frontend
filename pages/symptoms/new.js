@@ -1,8 +1,39 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { useState } from "react"
 import {useRouter} from 'next/router'
 import bodyParts from '../../data/data'
 import Link from 'next/link'
+import Back from '../../components/Back'
 
+const Form = styled.form`
+    width: 80%;
+    max-width: 450px;
+    margin: 20px auto;
+    input[type="submit"] {
+        margin: 10px auto 30px;
+        padding: 5px;
+        display: block;
+    }
+`
+
+const FlexPair = styled.div`
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin: 3px;
+    }
+    input, textarea {
+        padding: 5px;
+    }
+    #severity {
+        width: 60%;
+    }
+    #startDate {
+        width: 60%;
+    }
+`
 
 export default function New(props) {
     const router = useRouter()
@@ -23,8 +54,7 @@ export default function New(props) {
     //    const res =  await fetch(`https://healthwise.p.rapidapi.com/body/symptoms/${index}`, {
     //         "method": "GET",
     //         "headers": {
-    //             "x-rapidapi-host": "healthwise.p.rapidapi.com",
-    //             "x-rapidapi-key": "4ee919ad6cmsh5063f9e60e2124ap1b74d1jsn5a1c434b42bd"
+
     //         }
     //     })
     //     const {data} = await res.json()
@@ -61,8 +91,8 @@ export default function New(props) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <Form onSubmit={handleSubmit}>
+                <FlexPair>
                     <label htmlFor="bodyPart">Body Part</label>
                     <input 
                         id="bodyPart"
@@ -80,9 +110,9 @@ export default function New(props) {
                             return <option key={index} id={index}>{part}</option>
                         })}
                     </select> */}
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="symptom">Symptom</label>
                     <input 
                         id="symptom"
@@ -92,9 +122,9 @@ export default function New(props) {
                         onChange={handleChange}
                         placeholder="Symptom"
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="startDate">Start Date</label>
                     <input 
                         id="startDate"
@@ -103,9 +133,9 @@ export default function New(props) {
                         value={formState.startDate}
                         onChange={handleChange}
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="severity">Severity (1-10)</label>
                     <input 
                         id="severity"
@@ -116,11 +146,11 @@ export default function New(props) {
                         min="1"
                         max="10"
                         step="1"
-                        placeholder="1-10"
+                        placeholder="Rate 1-10"
                     />
-                </div>
+                </FlexPair>
 
-                <div>
+                <FlexPair>
                     <label htmlFor="notes">Notes</label>
                     <textarea 
                         id="notes"
@@ -130,13 +160,11 @@ export default function New(props) {
                         onChange={handleChange}
                         placeholder="Describe symptom here"
                     />
-                </div>
+                </FlexPair>
 
                 <input type="submit" value="Add Symptom"/>
-            </form>
-            <Link href="/symptoms">
-                <a>Back to main list</a>
-            </Link>
+            </Form>
+            <Back></Back>
         </div>
     )
 }

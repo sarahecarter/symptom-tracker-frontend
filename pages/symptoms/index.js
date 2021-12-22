@@ -1,16 +1,18 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import Head from 'next/head'
+import colors from '../../styles/colors'
 
 const New = styled.button`
     display: block;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    border: 1px solid gray;
-    margin: 10px auto;
+    border: none;
+    margin: 30px auto 20px;
+    background: ${colors.primaryAccent};
+    color: ${colors.background};
+    font-size: 1em;
 `
 
 const CardContainer = styled.div`
@@ -29,18 +31,31 @@ const Card = styled.div`
     width: 80%;
     max-width: 400px;
     margin: 10px;
-    padding: 10px;
-    border: 1px solid gray;
+    border: .5px solid silver;
     border-radius: 10px;
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    box-shadow: 5px 5px 10px silver;
+    color: ${colors.primary};
+    div {
+        background: ${colors.primary};
+        color: white;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        border-radius: 10px 10px 0px 0px;
+    }
+    p {
+        color: ${colors.secondary};
+        margin-bottom: 20px;
+    }
     @media (min-width: 768px) {
-        width: 250px;
-        height: 250px;
+        width: 25%;
+        height: 200px;
     }
 `
 
@@ -58,7 +73,9 @@ export default function Index({symptoms}, title, description) {
                     {symptoms.map(symp => {
                         return <Link href={`/symptoms/${symp._id}`} key={symp._id}>
                             <Card>
-                                <h2>{symp.symptom}</h2>
+                                <div>
+                                    <h2>{symp.symptom}</h2>
+                                </div>
                                 <h3>{symp.bodyPart}</h3>
                                 <p>Started: {symp.startDate}</p>
                             </Card>

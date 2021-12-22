@@ -4,8 +4,14 @@ import styled from '@emotion/styled'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
+import colors from '../styles/colors'
 
 // Styled Components
+const Header = styled.header`
+  background-color: ${colors.primary};
+  color: white;
+`
+
 const Flex = styled.div`
   display: flex;
   flex-direction: row;
@@ -16,6 +22,7 @@ const Flex = styled.div`
 
 const Nav = styled.nav`
   display: none;
+  padding-bottom: 20px;
   &.showMenu {
     display: flex;
     flex-direction: column;
@@ -26,12 +33,16 @@ const Nav = styled.nav`
   @media (min-width: 768px) {
     display: flex;
     margin: 10px;
+    padding-bottom: 0;
   }
 `
 
 const NavLink = styled.a`
   margin: 5px;
   cursor: pointer;
+  &:hover {
+    color: ${colors.primaryLight};
+  }
 `
 
 const Hamburger = styled.div`
@@ -58,7 +69,7 @@ const Hamburger = styled.div`
 const Bar = styled.div`
   width: 25px;
   height: 3px;
-  background-color: black;
+  background-color: white;
   margin: 3px;
 `
 
@@ -81,7 +92,7 @@ export default function Layout({children, home, title, description}) {
             <meta name="description" content={description} />
             <link rel="icon" href="/favicon.ico" />
         </Head>
-        <header>
+        <Header>
           <Flex>
             <Link href="/">
               <h1
@@ -115,7 +126,7 @@ export default function Layout({children, home, title, description}) {
               </Link>
             </Nav>
           </Flex>
-        </header>
+        </Header>
         <main>{children}</main>
         <Footer>
           <p>Created by 
@@ -125,7 +136,7 @@ export default function Layout({children, home, title, description}) {
                 color: black;
                 margin: 5px;
                 &:hover {
-                  color: purple;
+                  color: ${colors.primaryAccent};
                 }
               `}
           >Sarah Carter</a></p>
