@@ -56,9 +56,6 @@ export default function New(props) {
     const router = useRouter()
     const url = "https://sc-capstone-backend.herokuapp.com/symptoms"
 
-    const [bodyPartIndex, setBodyPartIndex] = useState(0)
-    const [symptomList, setSymptomList] = useState([])
-
     const [formState, setFormState] = useState({
         bodyPart: null,
         symptom: null,
@@ -66,27 +63,6 @@ export default function New(props) {
         severity: null,
         notes: null
     })
-
-    const fetchSymptomList = async (index) => {
-       const res =  await fetch(`https://healthwise.p.rapidapi.com/body/symptoms/${index}`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": process.env.RAPID_API_URL,
-                "x-rapidapi-key": process.env.RAPID_API_KEY
-            }
-        })
-        const {data} = await res.json()
-        let symptomList = []
-        data?.result[0].symptoms.map((symptom) => {
-            symptomList.push(symptom.symptom)
-        })
-        setSymptomList(symptomList)
-    }
-
-    const handleChangeSelect = (e) => {
-        setBodyPartIndex(e.target.selectedIndex)
-        fetchSymptomList(bodyPartIndex)
-    }
 
     const handleChange = (e) => {
         const newState = {...formState}
@@ -116,22 +92,14 @@ export default function New(props) {
             <Form onSubmit={handleSubmit}>
                 <FlexPair>
                     <label htmlFor="bodyPart">Body Part</label>
-                    {/* <input 
+                    <input 
                         id="bodyPart"
                         type="text"
                         name="bodyPart"
                         value={formState.bodyPart}
                         onChange={handleChange}
                         placeholder="Body Part"
-                    /> */}
-                    <select
-                        onChange={handleChangeSelect}
-                    >
-                        <option>other</option>
-                        {bodyParts.map((part, index) => {
-                            return <option key={index} id={index}>{part}</option>
-                        })}
-                    </select>
+                    />
                 </FlexPair>
 
                 <FlexPair>
