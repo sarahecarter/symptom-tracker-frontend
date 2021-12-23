@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {useRouter} from 'next/router'
 import Back from "../../../components/Back";
 import colors from '../../../styles/colors'
@@ -15,6 +15,22 @@ const Form = styled.form`
         padding: 5px;
         display: block;
     }
+    .check {
+        text-align: center;
+    }
+    input[type="checkbox"] {
+        margin: auto;
+        width: 20px;
+        height: 20px;
+    }
+    @media (min-width: 500px) {
+        .check {
+            flex-direction: row;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            margin: 10px;
+        }
 `
 
 const FlexPair = styled.div`
@@ -55,6 +71,8 @@ export default function Edit({symptom}) {
     const router = useRouter()
     const url = "https://sc-capstone-backend.herokuapp.com/symptoms/"
 
+    const checkbox = useRef(null)
+
     const [formState, setFormState] = useState(symptom)
 
     const handleChange = (e) => {
@@ -63,8 +81,26 @@ export default function Edit({symptom}) {
         setFormState(newState)
     }
 
+    const handleCheck = (e) => {
+        const newState = {...formState}
+        if (e.target.checked) {
+            newState[e.target.name] = true
+        }
+        else {
+            newState[e.target.name] = false
+        }
+        setFormState(newState)
+    }
+
+    const checkInactive = () => {
+        const newState = {...formState}
+        newState["inactive"] = checkbox.current.checked
+        setFormState(newState)
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        checkInactive()
         await fetch(url + symptom._id, {
             method: "PUT",
             headers: {
@@ -137,6 +173,18 @@ export default function Edit({symptom}) {
                         value={formState.notes}
                         onChange={handleChange}
                         placeholder="Describe symptom here"
+                    />
+                </FlexPair>
+
+                <FlexPair className="check">
+                    <label htmlFor="inactive">Check if symptom is no longer active:</label>
+                    <input 
+                        id="inactive"
+                        type="checkbox"
+                        name="inactive"
+                        value={formState.inactive}
+                        onChange={handleCheck}
+                        ref={checkbox}
                     />
                 </FlexPair>
 
