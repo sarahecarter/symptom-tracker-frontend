@@ -115,7 +115,7 @@ export default function Show({symptom}, title, description) {
                 <p className={symptom.inactive ? "severe" : ""}>{symptom.inactive ? "No longer active": ""}</p>
                 <h4>Body Part: {symptom.bodyPart}</h4>
                 <h4>Date Started:</h4>
-                <p>{symptom.startDate} ({calculateTimeElapsed(symptom.startDate)})</p>
+                <p>{symptom.startDate} {symptom.inactive ? "" : `(${calculateTimeElapsed(symptom.startDate)})`}</p>
                 <h4>Severity:</h4>
                 <p className={symptom.severity > 5 ? "severe" : "mild"}>{symptom.severity}</p>
                 <h4>Notes:</h4>
