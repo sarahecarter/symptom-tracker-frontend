@@ -41,6 +41,7 @@ As a user, I can update a symptom in case I made a typo.
 ## Bonus Features
 - **Severity coloring:** If the patient lists the severity of their symptoms as being greater than a 5 (on a scale of 1 to 10) then the color of the number on the show page turns to red. This could be a useful visual cue for doctors to see what symptoms are causing their patient's the most harm.
 - **Time elapsed:** On the show page, the user can see how many days have passed since the start of their symptom.
+- **Inactive Symptoms**: A user can update a symptom to inactive if that symptom has subsided. To do this, the user can go into the edit form and check that the symptom is inactive. The card will update and turn gray on the index and show pages to show that it is no longer an active symptom.
 
 ## Challenges
 - This was my first time using emotion, or a CSS in JS library and styled components. As someone who usually styles using plain CSS or Sass, it was a challenge for me to adjust to a new way of styling. I found that what would usually take me an hour to do in Sass took me many more hours in emotion. However, the more I practiced the more I got used to this way of styling and ultimately I was able to design and app that I think looks professional.
