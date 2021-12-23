@@ -56,7 +56,6 @@ export default function Edit({symptom}) {
     const url = "https://sc-capstone-backend.herokuapp.com/symptoms/"
 
     const [formState, setFormState] = useState(symptom)
-    console.log(symptom.startDate)
 
     const handleChange = (e) => {
         const newState = {...formState}

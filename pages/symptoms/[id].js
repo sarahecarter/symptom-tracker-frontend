@@ -83,6 +83,16 @@ export default function Show({symptom}, title, description) {
         router.push("/symptoms")
     }
 
+    const calculateTimeElapsed = (start) => {
+        const startDate = Date.parse(start)
+        const current = new Date()
+        const difference = current - startDate
+        return (difference / (1000 * 60 * 60 * 24))
+    }
+
+    console.log(calculateTimeElapsed(symptom.startDate))
+    // calculateTimeElapsed(symptom.startDate)
+
     return ( 
         <>
             <Card>

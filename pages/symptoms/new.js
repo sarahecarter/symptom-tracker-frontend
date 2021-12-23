@@ -1,10 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useState, useEffect } from "react"
 import {useRouter} from 'next/router'
-import bodyParts from '../../data/data'
-import Link from 'next/link'
 import Back from '../../components/Back'
 import colors from '../../styles/colors'
 
@@ -82,10 +78,6 @@ export default function New(props) {
 
         router.push("/symptoms")
     }
-
-    useEffect(() => {
-        fetchSymptomList(1)
-    }, [])
 
     return (
         <div>
