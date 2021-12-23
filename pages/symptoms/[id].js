@@ -29,6 +29,13 @@ div.heading {
     color: ${colors.background};
     padding: 10px;
 }
+div.inactive {
+    background: gray;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    color: ${colors.background};
+    padding: 10px;
+}
 > * {
     margin-bottom: 10px;
 }
@@ -97,12 +104,15 @@ export default function Show({symptom}, title, description) {
         return timeElapsed === 1 ? `${timeElapsed} day ago` : `${timeElapsed} days ago`
     }
 
+    console.log(symptom)
+
     return ( 
         <>
             <Card>
-                <div className="heading">
+                <div className={symptom.inactive ? "inactive" : "heading"}>
                     <h2>{symptom.symptom}</h2>
                 </div>
+                <p className={symptom.inactive ? "severe" : ""}>{symptom.inactive ? "No longer active": ""}</p>
                 <h4>Body Part: {symptom.bodyPart}</h4>
                 <h4>Date Started:</h4>
                 <p>{symptom.startDate} ({calculateTimeElapsed(symptom.startDate)})</p>

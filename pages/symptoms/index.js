@@ -53,6 +53,9 @@ const Card = styled.div`
         margin: 0;
         padding: 20px;
         border-radius: 10px 10px 0px 0px;
+        &.inactive {
+            background: gray;
+        }
     }
     p {
         color: ${colors.secondary};
@@ -72,8 +75,10 @@ const Card = styled.div`
 `
 
 
-
 export default function Index({symptoms}, title, description) {
+    const handleFilter = (e) => {
+
+    }
 
     return (
         <>
@@ -87,8 +92,8 @@ export default function Index({symptoms}, title, description) {
                 <CardContainer>
                     {symptoms.map(symp => {
                         return <Link href={`/symptoms/${symp._id}`} key={symp._id}>
-                            <Card>
-                                <div>
+                            <Card className={symp.inactive ? "inactive" : ""}>
+                                <div className={symp.inactive ? "inactive" : ""}>
                                     <h2>{symp.symptom}</h2>
                                 </div>
                                 <h3>{symp.bodyPart}</h3>
