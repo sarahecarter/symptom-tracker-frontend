@@ -71,7 +71,10 @@ const Card = styled.div`
     }
 `
 
+
+
 export default function Index({symptoms}, title, description) {
+
     return (
         <>
             <Head>

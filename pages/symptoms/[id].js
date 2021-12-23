@@ -84,14 +84,18 @@ export default function Show({symptom}, title, description) {
     }
 
     const calculateTimeElapsed = (start) => {
-        const startDate = Date.parse(start)
-        const current = new Date()
-        const difference = current - startDate
-        return (difference / (1000 * 60 * 60 * 24))
+        // reformat date
+        const year = start.split('').slice(0,4).join('')
+        const month = start.split('').slice(5,7).join('')
+        const day = start.split('').slice(8,10).join('')
+        // Create dates
+        const startDate = new Date(year, month -1, day, 0, 0, 0)
+        const now = new Date()
+        // find difference in UTC and convert to days
+        const difference = now.getTime() - startDate.getTime() 
+        const timeElapsed = Math.floor(difference / (1000 * 60 * 60 * 24))
+        return timeElapsed === 1 ? `${timeElapsed} day ago` : `${timeElapsed} days ago`
     }
-
-    console.log(calculateTimeElapsed(symptom.startDate))
-    // calculateTimeElapsed(symptom.startDate)
 
     return ( 
         <>
@@ -101,7 +105,7 @@ export default function Show({symptom}, title, description) {
                 </div>
                 <h4>Body Part: {symptom.bodyPart}</h4>
                 <h4>Date Started:</h4>
-                <p>{symptom.startDate}</p>
+                <p>{symptom.startDate} ({calculateTimeElapsed(symptom.startDate)})</p>
                 <h4>Severity:</h4>
                 <p className={symptom.severity > 5 ? "severe" : "mild"}>{symptom.severity}</p>
                 <h4>Notes:</h4>
